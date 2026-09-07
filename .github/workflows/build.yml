@@ -1,0 +1,28 @@
+name: Build Joplin Plugin
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: # امکان اجرای دستی با یک کلیک
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. دریافت فایل‌های کد
+        uses: actions/checkout@v4
+
+      - name: 2. ساخت پوشه خروجی
+        run: mkdir -p publish
+
+      - name: 3. فشرده‌سازی و تبدیل به فایل رسمی .jpl
+        run: |
+          cd src
+          tar -cvf ../publish/ThemeToggle.jpl manifest.json index.js
+
+      - name: 4. آپلود فایل نصبی برای دانلود
+        uses: actions/upload-artifact@v4
+        with:
+          name: Joplin-Theme-Toggle-Plugin
+          path: publish/*.jpl
