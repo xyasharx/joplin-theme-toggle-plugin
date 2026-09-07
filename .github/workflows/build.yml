@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: 1. دریافت فایل‌های کد
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 2. ساخت پوشه خروجی
         run: mkdir -p publish
@@ -22,7 +22,7 @@ jobs:
           tar -cvf ../publish/ThemeToggle.jpl manifest.json index.js
 
       - name: 4. آپلود فایل نصبی برای دانلود
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Joplin-Theme-Toggle-Plugin
           path: publish/*.jpl
